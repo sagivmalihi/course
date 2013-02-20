@@ -390,18 +390,18 @@ Examples of immutable objects: ints, strings, tuples etc'.
 
 Examples of Mutable objects: lists, dicts, objects etc'.
 
-Because immutable objects can't change, They are passed by value.
-This is in contrast to mutable objects, which are passed by reference.
+Performing "mutating" operations on immutable objects is usually implemented by copying the object.
+Mutable objects really mutate, so every reference 'sees' the change.
 
 Example:
 
 	!python
 	>>> string = "foo"
-	>>> copy = string # creates a new string
-	>>> string += "bar" 
+	>>> copy = string 
+	>>> string += "bar" # creates a new string 
 	>>> string
 	foobar
-	>>> copy
+	>>> copy # still references the original string
 	foo
 	
 	>>> l = [1, 2, 3]
