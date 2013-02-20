@@ -1,45 +1,53 @@
---- day 1 ---
-
-*args **kwargs
-
-decorators
-
-staticmethod/classmethod
-
-generators pdf
-
-generators
-  
-metaclasses
-
-contextmanagers
-
-internals
-
---- day 2 ---
-
-internals - if any left
-
-gc
-
-concurrency pdf
-
-stl
-
-construct
-
-rpyc
-
-re
-
---- day 3 ---
-
-logging
-
+basic data structures and usage
+    dict for mappings only!
+    tuple for records
+    namedtuple
+    list for dynamic collections
+    sets when the order & count don't matter
+    functions
+        *args, **kwargs
+    classes for records with functionality and specialization
+        __slots__
+        a word on multiple inheritance and 'super'
+FP
+    generators / iterators
+        coroutines
+    decorators
+        @classmethod
+        @staticmethod
+        @property
+    contextmanagers
+        usage & examples
+        protocol
+        the @contextmanager decorator
+common bugs
+    def f(l=[]):
+    try: except A,B:
+    def foo(string=None): if string:
+    __del__ ?
 debugging
-
-debugging pdf
-
-unittest
-
-game
+    pdb / pudb
+    rpyc/pystuck
+packages - stdlib
+    collections
+        defaultdict
+        namedtuple
+    itertools
+    functools
+    argparse
+    os.path
+    re
+    pickle
+    logging
+packages - external
+    lxml
+unittesting
+    unittest
+    nose
+    mock
+style (for people coming from very OO / imperative languages)
+    imperative is bad
+    for / while loops -> list comprehension
+    classes as namespaces -> modules
+    Strict typing is good (dict is not the answer)
+    DRY !!!
