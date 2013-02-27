@@ -50,9 +50,9 @@ Strings are *immutable*
 Stores mappings
 
     !python
-    >>> phone_numbers = {"sagiv": "0526087182", "alon": "12345678"}
+    >>> phone_numbers = {"sagiv": "0526187182", "alon": "12345678"}
     >>> phone_numbers['sagiv']
-    '0526087182'
+    '0526187182'
     >>> phone_numbers['sagiv'] = "000000" # dicts are *mutable*
     >>> phone_numbers
     {'alon': '12345678', 'sagiv': '000000'}
@@ -117,7 +117,8 @@ When order & count don't matter
     set([1])
     >>> set([1,2]) & (set([2,3]))
     set([2])
-
+    >>> set(x%2 for x in range(10))
+    set([0, 1])
 
 ---
 
@@ -138,6 +139,11 @@ Are first-class citizens.
     14
     >>> f(y='world', x='hello ')
     'hello world'
+    >>> a, b = g,  f
+    >>> a(1, 1)
+    2
+    >>> b(2, 2)
+    4
 
 ---
 
@@ -215,11 +221,25 @@ Examples:
 
 Allows us to create new types. 
 
-Beware of old-style classes (bug from Python's *dark* past):
+    !python
+    class Person(object):
+        MAX_AGE = 128
+        def __init__(self, age):
+            self.age = age
+    >>> p = Person(28)
+    >>> type(p)  # never do this unless for very good reason
+    <class '__main__.Person'>
+    >>> isinstance(p, Person)
+    True
+
+Note1: classes are *not* mandatory and they are *not* namespaces!
+
+Note2: Beware of old-style classes (bug from Python's *dark* past):
 
     !python
     class A:
-        def f(self): pass
+        def __init__(self): pass
+---
 
 Python supports multiple inhertiance!
 
@@ -311,4 +331,21 @@ No attributes can be added to classes with `__slots__`:
 	
 Note: `__slots__` and inheritence - `__dict__` allocation will be prevented only if all classes in the inheritence tree define `__slots__`.
 
+--- 
+
+## namedtuple
+
+used for easily defining lightweight classes
+
+	!python
+	>>> from collections import namedtuple
+	>>> Point = namedtuple("Point", "x y") # generates a class
+	>>> p = Point(10, 20) 
+	>>> print p # automatic __repr__
+	Point(x=10, y=20)
+	>>> x, y = p
+	>>> p.x = 100 # immutable
+	Traceback (most recent call last):
+	  File "<stdin>", line 1, in <module>
+    AttributeError: can't set attribute
 
