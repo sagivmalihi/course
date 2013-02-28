@@ -59,6 +59,29 @@ Other examples
 
 ---
 
+## Decorators
+
+Type checking decorator example:
+
+    !python
+    def type_check(*types):
+        def decorator(func):
+            def decorated_func(*args):
+                # check types
+                for arg, type_ in zip(args, types):
+                    if not isinstance(arg, type_):
+                        raise TypeError("{} is not of type {}".format(arg, type_))
+                return func(*args) 
+            return decorated_func
+        return decorator 
+
+
+    @type_check(str, int)
+    def get_char_at(s, i):
+        return s[i]
+
+---
+
 ## Some Famous Decorators
 
     !python
@@ -316,4 +339,7 @@ The easy way to create a Context Manager for a Generator and a Decorator
         def helper(*args, **kwargs):
             return GeneratorCM(func(*args, **kwargs))
         return helper
+
+
+    
 
